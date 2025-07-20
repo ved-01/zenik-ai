@@ -1,42 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Zenik AI Design System - Modern, Professional, Tech-Forward */
 
 @layer base {
   :root {
+    /* Background & Surfaces */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 220 13% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 220 13% 9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 220 13% 9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Brand Colors - Deep Blues */
+    --primary: 219 89% 26%;        /* Deep blue #1d4ed8 */
+    --primary-foreground: 0 0% 98%;
+    --primary-glow: 219 89% 35%;   /* Lighter blue for gradients */
+    
+    /* Accent Colors */
+    --accent-violet: 262 83% 66%;   /* Electric violet #a855f7 */
+    --accent-teal: 173 80% 40%;     /* Teal #14b8a6 */
+    --accent-violet-foreground: 0 0% 98%;
+    --accent-teal-foreground: 0 0% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary & Muted */
+    --secondary: 220 13% 95%;
+    --secondary-foreground: 220 13% 9%;
+    --muted: 220 13% 95%;
+    --muted-foreground: 220 9% 46%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Utility Colors */
+    --accent: 220 13% 95%;
+    --accent-foreground: 220 13% 9%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 219 89% 26%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-violet: linear-gradient(135deg, hsl(var(--accent-violet)), hsl(262 83% 75%));
+    --gradient-teal: linear-gradient(135deg, hsl(var(--accent-teal)), hsl(173 80% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent-violet)) 50%, hsl(var(--accent-teal)) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(220 13% 98%));
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Shadows & Effects */
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.15);
+    --shadow-violet-glow: 0 0 40px hsl(var(--accent-violet) / 0.2);
+    --shadow-elegant: 0 10px 40px -10px hsl(var(--primary) / 0.2);
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
+    /* Border Radius */
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +75,51 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark mode backgrounds */
+    --background: 220 26% 6%;        /* Very dark blue-gray */
+    --foreground: 0 0% 98%;
+    --card: 220 20% 8%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 98%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    /* Dark mode brand colors */
+    --primary: 219 89% 65%;          /* Brighter blue for dark mode */
+    --primary-foreground: 220 26% 6%;
+    --primary-glow: 219 89% 75%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    /* Dark mode accents - brighter for contrast */
+    --accent-violet: 262 83% 75%;
+    --accent-teal: 173 80% 55%;
+    --accent-violet-foreground: 220 26% 6%;
+    --accent-teal-foreground: 220 26% 6%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    /* Dark mode secondary */
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 220 15% 12%;
+    --muted-foreground: 220 10% 65%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    /* Dark mode utilities */
+    --accent: 220 15% 15%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84% 65%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 219 89% 65%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-violet: linear-gradient(135deg, hsl(var(--accent-violet)), hsl(262 83% 85%));
+    --gradient-teal: linear-gradient(135deg, hsl(var(--accent-teal)), hsl(173 80% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent-violet)) 50%, hsl(var(--accent-teal)) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(var(--background)), hsl(220 20% 8%));
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* Dark mode shadows */
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.3);
+    --shadow-violet-glow: 0 0 40px hsl(var(--accent-violet) / 0.3);
+    --shadow-elegant: 0 10px 40px -10px hsl(var(--primary) / 0.4);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +137,108 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-inter antialiased;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold leading-tight;
+  }
+
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent;
+  }
+
+  .text-gradient-hero {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer components {
+  /* Button Variants */
+  .btn-hero {
+    @apply relative overflow-hidden bg-gradient-to-r from-primary to-primary-glow text-primary-foreground;
+    @apply hover:shadow-glow transition-all duration-300;
+    @apply before:absolute before:inset-0 before:bg-gradient-to-r before:from-accent-violet/20 before:to-accent-teal/20;
+    @apply before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300;
+  }
+
+  .btn-outline-glow {
+    @apply border-2 border-primary text-primary bg-transparent;
+    @apply hover:bg-primary hover:text-primary-foreground hover:shadow-glow;
+    @apply transition-all duration-300;
+  }
+
+  .btn-violet {
+    @apply bg-gradient-to-r from-accent-violet to-accent-violet/80 text-accent-violet-foreground;
+    @apply hover:shadow-violet-glow transition-all duration-300;
+  }
+
+  /* Card Effects */
+  .card-glow {
+    @apply bg-card border border-border shadow-lg;
+    @apply hover:shadow-elegant hover:border-primary/20 transition-all duration-300;
+  }
+
+  .card-gradient {
+    @apply relative bg-gradient-to-br from-card to-muted border-0;
+    @apply before:absolute before:inset-0 before:bg-gradient-to-br before:from-primary/5 before:to-accent-violet/5;
+    @apply before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300;
+  }
+
+  /* Animation Classes */
+  .animate-fade-in-up {
+    @apply animate-[fadeInUp_0.6s_ease-out_forwards];
+  }
+
+  .animate-float {
+    @apply animate-[float_3s_ease-in-out_infinite];
+  }
+}
+
+@layer utilities {
+  /* Background gradients using CSS variables */
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .bg-gradient-violet {
+    background: var(--gradient-violet);
+  }
+
+  .bg-gradient-teal {
+    background: var(--gradient-teal);
+  }
+
+  .bg-gradient-subtle {
+    background: var(--gradient-subtle);
+  }
+}
+
+/* Custom Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
