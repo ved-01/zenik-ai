@@ -1,10 +1,9 @@
 import { Hero } from "@/components/Hero"
-import { About } from "@/components/About"
-import { Services } from "@/components/Services"
-import { Industries } from "@/components/Industries"
-import { CaseStudies } from "@/components/CaseStudies"
-import { Blog } from "@/components/Blog"
-import { Contact } from "@/components/Contact"
+import { Section2 } from "@/components/Section2"
+import { Section3 } from "@/components/Section3"
+import { Section4 } from "@/components/Section4"
+import { Section5 } from "@/components/Section5"
+import { Section6 } from "@/components/Section6"
 import { Footer } from "@/components/Footer"
 import { NavLogo } from "@/components/NavLogo"
 import { IntroAnimation } from "@/components/IntroAnimation"
@@ -39,6 +38,11 @@ const Index = () => {
             transition={{ duration: 0.8 }}
           >
             <Hero />
+            <Section2 />
+            <Section3 />
+            <Section4 />
+            <Section5 />
+            <Section6 />
           </motion.main>
         )}
       </AnimatePresence>
