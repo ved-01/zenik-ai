@@ -31,7 +31,7 @@ export function Blog() {
   ]
 
   return (
-    <section id="blog" className="py-24 bg-gradient-subtle">
+    <section id="blog" className="py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
