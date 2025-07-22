@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,9 +10,9 @@
 @layer base {
   :root {
     /* Dark mode backgrounds */
-    --background: 222 26% 5%;        /* #080B14 converted to HSL */
+    --background: 222 26% 5%; /* #080B14 converted to HSL */
     --foreground: 0 0% 98%;
-    --card: 222 26% 7%;             /* Slightly lighter than background */
+    --card: 222 26% 7%; /* Slightly lighter than background */
     --card-foreground: 0 0% 98%;
     --popover: 222 26% 7%;
     --popover-foreground: 0 0% 98%;

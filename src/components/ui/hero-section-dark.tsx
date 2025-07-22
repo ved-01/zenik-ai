@@ -9,7 +9,7 @@ interface HeroSectionProps extends React.HTMLAttributes<HTMLDivElement> {
     regular: string
     gradient: string
   }
-  subtitleNode?: React.ReactNode // <-- add this line
+  subtitleNode?: React.ReactNode
   description?: string
   ctaText?: string
   ctaHref?: string
