@@ -1,4 +1,5 @@
 import { Target, Users, Lightbulb, Shield } from "lucide-react"
+import { ParallaxSection } from "@/components/ui/parallax-section"
 
 export function About() {
   const values = [
@@ -27,7 +28,8 @@ export function About() {
   return (
     <section id="about" className="pb-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <ParallaxSection speed={0.3}>
+          <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
@@ -74,17 +76,26 @@ export function About() {
               </div>
             </div>
 
-            {/* Visual Element */}
-            <div className="relative">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="h-32 bg-gradient-primary rounded-lg opacity-20" />
-                <div className="h-32 bg-gradient-violet rounded-lg opacity-20 mt-8" />
-                <div className="h-32 bg-gradient-teal rounded-lg opacity-20 -mt-8" />
-                <div className="h-32 bg-gradient-primary rounded-lg opacity-20" />
+            {/* Stats Section */}
+            <div className="space-y-8">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="text-center p-6 bg-card border border-border rounded-lg">
+                  <div className="text-3xl font-bold text-gradient-primary mb-2">250+</div>
+                  <div className="text-muted-foreground">AI Projects Delivered</div>
+                </div>
+                <div className="text-center p-6 bg-card border border-border rounded-lg">
+                  <div className="text-3xl font-bold text-gradient-primary mb-2">95%</div>
+                  <div className="text-muted-foreground">Client Success Rate</div>
+                </div>
               </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-24 h-24 bg-gradient-hero rounded-full flex items-center justify-center text-background font-bold text-2xl">
-                  AI
+              <div className="grid grid-cols-2 gap-6">
+                <div className="text-center p-6 bg-card border border-border rounded-lg">
+                  <div className="text-3xl font-bold text-gradient-primary mb-2">50+</div>
+                  <div className="text-muted-foreground">AI Experts</div>
+                </div>
+                <div className="text-center p-6 bg-card border border-border rounded-lg">
+                  <div className="text-3xl font-bold text-gradient-primary mb-2">24/7</div>
+                  <div className="text-muted-foreground">Support Available</div>
                 </div>
               </div>
             </div>
@@ -102,7 +113,8 @@ export function About() {
               </div>
             ))}
           </div>
-        </div>
+          </div>
+        </ParallaxSection>
       </div>
     </section>
   )

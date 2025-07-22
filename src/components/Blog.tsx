@@ -1,5 +1,6 @@
 import { Calendar, ArrowRight, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ParallaxSection } from "@/components/ui/parallax-section"
 
 export function Blog() {
   const articles = [
@@ -33,7 +34,8 @@ export function Blog() {
   return (
     <section id="blog" className="py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <ParallaxSection speed={0.4}>
+          <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
@@ -77,10 +79,21 @@ export function Blog() {
                   </Button>
                 </div>
 
-                {/* Featured Article Visual */}
-                <div className="bg-gradient-to-br from-primary/20 to-accent-violet/20 p-8 lg:p-12 flex items-center justify-center">
-                  <div className="w-32 h-32 bg-gradient-hero rounded-full flex items-center justify-center">
-                    <div className="text-4xl font-bold text-white">AI</div>
+                {/* Featured Article Stats */}
+                <div className="bg-gradient-to-br from-primary/5 to-accent-violet/5 p-8 lg:p-12">
+                  <div className="space-y-6">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-gradient-primary mb-2">15K+</div>
+                      <div className="text-muted-foreground">Readers</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-gradient-primary mb-2">50+</div>
+                      <div className="text-muted-foreground">Expert Articles</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-gradient-primary mb-2">Weekly</div>
+                      <div className="text-muted-foreground">New Content</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -125,7 +138,8 @@ export function Blog() {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
-        </div>
+          </div>
+        </ParallaxSection>
       </div>
     </section>
   )

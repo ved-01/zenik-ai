@@ -1,5 +1,6 @@
 import { Brain, Cog, Sparkles, Settings, Database, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ParallaxSection } from "@/components/ui/parallax-section"
 
 export function Services() {
   const services = [
@@ -44,7 +45,8 @@ export function Services() {
   return (
     <section id="services" className="py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <ParallaxSection speed={0.4} direction="down">
+          <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
@@ -101,7 +103,8 @@ export function Services() {
               </Button>
             </div>
           </div>
-        </div>
+          </div>
+        </ParallaxSection>
       </div>
     </section>
   )

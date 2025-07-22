@@ -1,4 +1,5 @@
 import { Building2, Heart, ShoppingCart, GraduationCap, Truck, Banknote } from "lucide-react"
+import { ParallaxSection } from "@/components/ui/parallax-section"
 
 export function Industries() {
   const industries = [
@@ -49,7 +50,8 @@ export function Industries() {
   return (
     <section id="industries" className="py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <ParallaxSection speed={0.5}>
+          <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
@@ -98,7 +100,8 @@ export function Industries() {
               Get Industry-Specific Consultation
             </div>
           </div>
-        </div>
+          </div>
+        </ParallaxSection>
       </div>
     </section>
   )

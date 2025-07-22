@@ -12,6 +12,13 @@ interface HeroSectionProps extends React.HTMLAttributes<HTMLDivElement> {
   description?: string
   ctaText?: string
   ctaHref?: string
+  gridOptions?: {
+    angle?: number
+    cellSize?: number
+    opacity?: number
+    lightLineColor?: string
+    darkLineColor?: string
+  }
 }
 
 const HeroSection = React.forwardRef<HTMLDivElement, HeroSectionProps>(

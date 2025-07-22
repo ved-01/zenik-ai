@@ -1,5 +1,6 @@
 import { ArrowRight, TrendingUp, Users, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { ParallaxSection } from "@/components/ui/parallax-section"
 
 export function CaseStudies() {
   const caseStudies = [
@@ -47,7 +48,8 @@ export function CaseStudies() {
   return (
     <section id="case-studies" className="py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <ParallaxSection speed={0.6} direction="down">
+          <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
@@ -143,7 +145,8 @@ export function CaseStudies() {
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </div>
-        </div>
+          </div>
+        </ParallaxSection>
       </div>
     </section>
   )

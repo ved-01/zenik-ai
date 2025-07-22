@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
+import { ParallaxSection } from "@/components/ui/parallax-section"
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -73,7 +74,8 @@ export function Contact() {
   return (
     <section id="contact" className="py-24 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
+        <ParallaxSection speed={0.3} direction="down">
+          <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
@@ -210,7 +212,8 @@ export function Contact() {
               </div>
             </div>
           </div>
-        </div>
+          </div>
+        </ParallaxSection>
       </div>
     </section>
   )
