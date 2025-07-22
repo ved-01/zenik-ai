@@ -39,12 +39,6 @@ const Index = () => {
             transition={{ duration: 0.8 }}
           >
             <Hero />
-            <About />
-            <Services />
-            <Industries />
-            <CaseStudies />
-            <Blog />
-            <Contact />
           </motion.main>
         )}
       </AnimatePresence>
