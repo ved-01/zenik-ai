@@ -59,10 +59,6 @@ export function Hero() {
     <div className="relative h-screen overflow-hidden">
       <div className="relative h-full max-w-screen-xl mx-auto px-4 flex items-center justify-center md:px-8">
         <div className="space-y-5 max-w-3xl mx-auto text-center">
-          <h1 className="text-sm text-gray-400 group font-geist mx-auto px-5 py-2 bg-black/20 border-[2px] border-white/5 rounded-3xl w-fit">
-            Build products for everyone
-            <ChevronRight className="inline w-4 h-4 ml-2 group-hover:translate-x-1 duration-300" />
-          </h1>
           
           <div className="flex flex-col items-center">
             <span className="block text-6xl md:text-7xl lg:text-8xl text-gray-300 font-normal tracking-tight leading-tight">

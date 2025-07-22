@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer"
 import { NavLogo } from "@/components/NavLogo"
 import { IntroAnimation } from "@/components/IntroAnimation"
 import { GradientWave } from "@/components/ui/animated-gradient-wave"
+import { ParallaxSection } from "@/components/ui/parallax-section"
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -38,10 +39,15 @@ const Index = () => {
             {/* Single GradientWave for all sections */}
             <GradientWave />
             
-            {/* Sections without their own backgrounds */}
+            {/* Sections with parallax effects */}
             <div className="relative z-10">
-              <Hero />
-              <Section2 />
+              <ParallaxSection speed={0.3} direction="down">
+                <Hero />
+              </ParallaxSection>
+              
+              <ParallaxSection speed={0.5} direction="up">
+                <Section2 />
+              </ParallaxSection>
             </div>
           </motion.main>
         )}
