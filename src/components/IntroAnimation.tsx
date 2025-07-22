@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import logoSvg from "../assets/logo.svg";
 
 // Your actual logo component using the SVG file
-const Logo = ({ className, style }) => (
+const Logo = ({ className, style }: { className: string; style?: React.CSSProperties }) => (
   <img 
     src={logoSvg} 
     alt="Zenik AI Logo" 
@@ -12,7 +12,7 @@ const Logo = ({ className, style }) => (
   />
 );
 
-export const IntroAnimation = ({ onAnimationComplete }) => {
+export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: () => void }) => {
   const [animationStage, setAnimationStage] = useState(0);
   const [showAnimation, setShowAnimation] = useState(true);
 
@@ -26,7 +26,7 @@ export const IntroAnimation = ({ onAnimationComplete }) => {
   }, []);
 
   // Variants for the main container that moves from center to top-left
-  const containerVariants = {
+  const containerVariants: Variants = {
     initial: {
       top: '50%',
       left: '50%',
@@ -48,7 +48,7 @@ export const IntroAnimation = ({ onAnimationComplete }) => {
   };
 
   // Variants for the text reveal animation
-  const textRevealVariants = {
+  const textRevealVariants: Variants = {
     hidden: { 
       width: 0,
       opacity: 0,
@@ -65,7 +65,7 @@ export const IntroAnimation = ({ onAnimationComplete }) => {
   };
 
   // Variants for the logo container to orchestrate the unfolding
-  const logoContainerVariants = {
+  const logoContainerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
@@ -75,7 +75,7 @@ export const IntroAnimation = ({ onAnimationComplete }) => {
   };
 
   // Variants for the unfolding panels
-  const panelVariants = {
+  const panelVariants: Variants = {
     hidden: {
       rotateY: 180,
       opacity: 0,
@@ -162,7 +162,7 @@ export const IntroAnimation = ({ onAnimationComplete }) => {
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.1 }}
                 >
-                  <Logo className="h-full w-full object-contain" />
+                  <Logo className="h-full w-full object-contain" style={{}} />
                 </motion.div>
 
                 {/* Panel 2 (Middle third) */}
@@ -174,7 +174,7 @@ export const IntroAnimation = ({ onAnimationComplete }) => {
                   }}
                   variants={panelVariants}
                 >
-                  <Logo className="h-full w-full object-contain" />
+                  <Logo className="h-full w-full object-contain" style={{}} />
                 </motion.div>
 
                 {/* Panel 3 (Right third) */}
@@ -186,7 +186,7 @@ export const IntroAnimation = ({ onAnimationComplete }) => {
                   }}
                   variants={panelVariants}
                 >
-                  <Logo className="h-full w-full object-contain" />
+                  <Logo className="h-full w-full object-contain" style={{}} />
                 </motion.div>
               </motion.div>
 
