@@ -1,7 +1,7 @@
 import { Hero } from "@/components/Hero"
 import { Section2 } from "@/components/Section2"
 import { AIJourneySection } from "@/components/Section3"
-import { Section4 } from "@/components/Section4"
+import { AIJourneyIntroSection } from "@/components/Section4"
 import { Section5 } from "@/components/Section5"
 import { Section6 } from "@/components/Section6"
 import { Footer } from "@/components/Footer"
@@ -49,8 +49,12 @@ const Index = () => {
                 <Section2 />
               </ParallaxSection>
 
+              <ParallaxSection speed={0.5} direction="up">
+                <AIJourneyIntroSection />
+              </ParallaxSection>
+
               {/* AIJourneySection has its own internal animation logic, so don't wrap it */}
-              <AIJourneySection />
+              <AIJourneySection  />
             </div>
           </motion.main>
         )}

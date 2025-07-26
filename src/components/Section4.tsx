@@ -1,24 +1,24 @@
-import React from 'react'
-import { HeroSection } from '@/components/ui/hero-section-dark'
+// components/ui/ai-journey-intro.tsx
+import React from "react";
+import { motion } from "framer-motion";
 
-export function Section4() {
-    return (
-        <HeroSection
-            title="4th Section"
-            subtitle={{
-                regular: "Transform your business with ",
-                gradient: "intelligent AI solutions",
-            }}
-            description="Empower your organization with cutting-edge artificial intelligence. From automation to insights, we help businesses unlock the full potential of AI technology."
-            ctaText="Get Started with AI"
-            ctaHref="#contact"
-            gridOptions={{
-                angle: 65,
-                opacity: 0.4,
-                cellSize: 50,
-                lightLineColor: "#4a4a4a",
-                darkLineColor: "#2a2a2a",
-            }}
-        />
-    )
-}
+export const AIJourneyIntroSection: React.FC = () => {
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <motion.h2 
+          className="text-2xl md:text-3xl lg:text-4xl text-white font-medium max-w-4xl mx-auto leading-tight"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          We spend our days guiding companies 
+          <br />
+          through our 3-step{' '}
+          <span className="text-green-400">AI Transformation</span>{' '}
+          Journey.
+        </motion.h2>
+      </div>
+    </div>
+  );
+};
