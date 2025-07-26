@@ -21,7 +21,7 @@ export const Section2: React.FC<Section2Props> = ({
             <div className="space-y-2">
               <p className="text-4xl md:text-5xl lg:text-6xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient">
                 of{' '}
-                <span className="text-emerald-400">everything</span>
+                <span className="text-green-400">everything</span>
                 {' '}we do.
               </p>
             </div>

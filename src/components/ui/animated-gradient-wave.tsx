@@ -8,7 +8,7 @@ export const GradientWave = () => {
       <motion.div
         className="absolute w-[200vw] h-[200vh] opacity-[0.16]"
         style={{
-          background: "radial-gradient(circle at 60% 40%, rgba(37, 197, 34, 0.7) 0%, rgba(22, 163, 74, 0.51) 30%, rgba(0,0,0,0.8) 70%)",
+          background: "radial-gradient(circle at 60% 40%, rgba(74, 222, 128, 0.4) 0%, rgba(34, 197, 94, 0.3) 30%, rgba(0,0,0,0.99) 70%)",
           filter: "blur(80px)",
         }}
         animate={{
@@ -27,7 +27,7 @@ export const GradientWave = () => {
       <motion.div
         className="absolute w-[150vw] h-[150vh] opacity-[0.11]"
         style={{
-          background: "conic-gradient(from 180deg at 30% 70%, rgba(16,185,129,0.6) 0%, rgba(5,150,105,0.3) 45%, rgba(17,24,39,0.8) 75%)",
+          background: "conic-gradient(from 180deg at 30% 70%, rgba(74, 222, 128,0.3) 0%, rgba(34, 197, 94,0.2) 45%, rgba(0,0,0,0.99) 75%)",
           filter: "blur(60px)",
         }}
         animate={{
@@ -46,7 +46,7 @@ export const GradientWave = () => {
       <motion.div
         className="absolute w-[100vw] h-[100vh] opacity-[0.06]"
         style={{
-          background: "linear-gradient(45deg, rgba(34,197,94,0.8) 0%, rgba(16,185,129,0.6) 25%, rgba(74,222,128,0.7) 0%, rgba(34,197,94,0.3) 35%, rgba(31,41,55,0.8) 60%)",
+          background: "linear-gradient(45deg, rgba(74,222,128,0.4) 0%, rgba(34,197,94,0.3) 25%, rgba(74,222,128,0.4) 50%, rgba(34,197,94,0.2) 75%, rgba(0,0,0,0.99) 100%)",
           filter: "blur(80px)",
         }}
         animate={{

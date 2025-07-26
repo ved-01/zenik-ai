@@ -1,19 +1,68 @@
 "use client";
 import * as React from "react";
 import { useRef } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
-// A reusable component for the animated circles
-const GlassCircle = ({ layoutId }: { layoutId: string }) => (
+// Single circle component that morphs position and size
+const MorphingCircle = ({ 
+  id,
+  scrollProgress,
+  configurations
+}: { 
+  id: string;
+  scrollProgress: any;
+  configurations: Array<{ x: number; y: number; size: number; opacity: number }>;
+}) => {
+  // Adjusted timing to match text visibility - morphing happens earlier
+  const x = useTransform(scrollProgress, [0, 0.33, 0.66, 1], [
+    configurations[0].x,
+    configurations[1].x,
+    configurations[1].x,
+    configurations[2].x
+  ]);
+  
+  const y = useTransform(scrollProgress, [0, 0.33, 0.66, 1], [
+    configurations[0].y,
+    configurations[1].y,
+    configurations[1].y,
+    configurations[2].y
+  ]);
+  
+  const size = useTransform(scrollProgress, [0, 0.33, 0.66, 1], [
+    configurations[0].size,
+    configurations[1].size,
+    configurations[1].size,
+    configurations[2].size
+  ]);
+  
+  const opacity = useTransform(scrollProgress, [0, 0.33, 0.66, 1], [
+    configurations[0].opacity,
+    configurations[1].opacity,
+    configurations[1].opacity,
+    configurations[2].opacity
+  ]);
+
+  return (
     <motion.div
-      layoutId={layoutId}
-      className="rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
+      className="absolute rounded-full bg-gradient-to-br from-emerald-300/20 to-teal-500/30 backdrop-blur-md border border-emerald-400/30 shadow-2xl"
+      style={{
+        x,
+        y,
+        width: size,
+        height: size,
+        opacity,
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+      }}
+      transition={{ 
+        type: "spring",
+        stiffness: 120,
+        damping: 30
+      }}
     />
   );
+};
 
 type JourneyStep = "identify" | "educate" | "develop";
 
@@ -37,52 +86,6 @@ const content = {
   },
 };
 
-// Reuse your original renderCircles function
-const renderCircles = (step: JourneyStep) => {
-  switch (step) {
-    case "identify":
-      return (
-        <div className="relative w-48 h-48">
-          <motion.div layoutId="container" className="absolute inset-0 flex items-center justify-center">
-            <GlassCircle layoutId="circle-1" />
-          </motion.div>
-          <motion.div layoutId="container-inner" className="absolute inset-0 flex items-center justify-center scale-50">
-            <GlassCircle layoutId="circle-2" />
-          </motion.div>
-        </div>
-      );
-    case "educate":
-      return (
-        <motion.div layoutId="container" className="flex space-x-4">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="w-28 h-28">
-              <GlassCircle layoutId={`circle-${i}`} />
-            </div>
-          ))}
-        </motion.div>
-      );
-    case "develop":
-      return (
-        <motion.div layoutId="container" className="relative w-96 h-64">
-          {[
-            { top: "0%", left: "33%", w: "h-28 w-28", id: 1 },
-            { top: "25%", left: "0%", w: "h-28 w-28", id: 2 },
-            { top: "25%", left: "66%", w: "h-28 w-28", id: 3 },
-            { top: "50%", left: "33%", w: "h-28 w-28", id: 4 },
-            { top: "50%", left: "0%", w: "h-28 w-28", id: 5 },
-            { top: "50%", left: "66%", w: "h-28 w-28", id: 6 },
-          ].map((item) => (
-            <motion.div key={item.id} className={`absolute ${item.w}`} style={{ top: item.top, left: item.left }}>
-              <GlassCircle layoutId={`circle-${item.id > 5 ? "new" : item.id}`} />
-            </motion.div>
-          ))}
-        </motion.div>
-      );
-    default:
-      return null;
-  }
-};
-
 export const AIJourneySection: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -91,36 +94,118 @@ export const AIJourneySection: React.FC = () => {
     offset: ["start start", "end start"],
   });
 
-  // Adjust transform to only go to -100% since we want to show 2 transitions between 3 sections
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"]);
+  // Text slide transform - matches circle timing exactly
+  const x = useTransform(scrollYProgress, [0, 0.33, 0.66, 1], ["0%", "-100%", "-100%", "-200%"]);
+
+  // Circle configurations for each section [identify, educate, develop]
+  const circleConfigurations = {
+    circle1: [
+      { x: 0, y: 0, size: 128, opacity: 1 },      // identify: center large
+      { x: -160, y: 0, size: 80, opacity: 1 },   // educate: first in line
+      { x: 0, y: 0, size: 72, opacity: 1 }       // develop: center
+    ],
+    circle2: [
+      { x: 0, y: -100, size: 80, opacity: 1 },   // identify: top smaller
+      { x: -80, y: 0, size: 80, opacity: 1 },    // educate: second in line
+      { x: 0, y: -80, size: 72, opacity: 1 }     // develop: top
+    ],
+    circle3: [
+      { x: 0, y: 0, size: 0, opacity: 0 },       // identify: hidden
+      { x: 0, y: 0, size: 80, opacity: 1 },      // educate: third in line
+      { x: -80, y: -40, size: 72, opacity: 1 }   // develop: top-left
+    ],
+    circle4: [
+      { x: 0, y: 0, size: 0, opacity: 0 },       // identify: hidden
+      { x: 80, y: 0, size: 80, opacity: 1 },     // educate: fourth in line
+      { x: 80, y: -40, size: 72, opacity: 1 }    // develop: top-right
+    ],
+    circle5: [
+      { x: 0, y: 0, size: 0, opacity: 0 },       // identify: hidden
+      { x: 160, y: 0, size: 80, opacity: 1 },    // educate: fifth in line
+      { x: -60, y: 60, size: 72, opacity: 1 }    // develop: bottom-left
+    ],
+    circle6: [
+      { x: 0, y: 0, size: 0, opacity: 0 },       // identify: hidden
+      { x: 0, y: 0, size: 0, opacity: 0 },       // educate: hidden
+      { x: 60, y: 60, size: 72, opacity: 1 }     // develop: bottom-right
+    ]
+  };
 
   return (
-    // Keep height setting to ensure horizontal animation works properly
     <section ref={containerRef} className="h-[350vh] relative w-full">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-900/10 to-teal-900/10 pointer-events-none" />
+        
+        {/* Fixed morphing circles container */}
+        <div className="fixed inset-0 flex items-center justify-center pointer-events-none z-10">
+          <div className="relative w-full h-full flex items-center justify-center">
+            {/* Background glow */}
+            <div className="absolute w-[500px] h-[500px] bg-gradient-radial from-emerald-400/8 via-teal-400/4 to-transparent rounded-full blur-3xl" />
+            
+            {/* Morphing circles */}
+            <div className="relative w-96 h-96">
+              <MorphingCircle 
+                id="circle1" 
+                scrollProgress={scrollYProgress} 
+                configurations={circleConfigurations.circle1} 
+              />
+              <MorphingCircle 
+                id="circle2" 
+                scrollProgress={scrollYProgress} 
+                configurations={circleConfigurations.circle2} 
+              />
+              <MorphingCircle 
+                id="circle3" 
+                scrollProgress={scrollYProgress} 
+                configurations={circleConfigurations.circle3} 
+              />
+              <MorphingCircle 
+                id="circle4" 
+                scrollProgress={scrollYProgress} 
+                configurations={circleConfigurations.circle4} 
+              />
+              <MorphingCircle 
+                id="circle5" 
+                scrollProgress={scrollYProgress} 
+                configurations={circleConfigurations.circle5} 
+              />
+              <MorphingCircle 
+                id="circle6" 
+                scrollProgress={scrollYProgress} 
+                configurations={circleConfigurations.circle6} 
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Sliding text content */}
         <motion.div
           style={{ x }}
-          className="flex h-full w-[300vw] transition-transform duration-500"
+          className="flex h-full w-[300vw] relative z-20"
         >
-          {sections.map((step) => (
+          {sections.map((step, index) => (
             <div
               key={step}
-              className="w-screen h-full flex flex-col items-center justify-center space-y-10 px-4"
+              className="w-screen h-full flex flex-col items-center justify-center space-y-12 px-4"
             >
-              {/* Circles */}
-              <AnimatePresence mode="wait">{renderCircles(step)}</AnimatePresence>
-
               {/* Text content */}
               <motion.div
-                key={step}
-                initial={{ opacity: 0, y: 20 }}
+                className="text-center space-y-6 mt-40"
+                initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                className="text-center space-y-4"
+                transition={{ 
+                  duration: 0.8,
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }}
               >
-                <h2 className="text-5xl md:text-6xl font-bold text-gray-300">{content[step].title}</h2>
-                <p className="text-lg md:text-xl text-gray-400 max-w-xl mx-auto">{content[step].description}</p>
+                <h2 className="text-5xl md:text-6xl font-bold text-gray-300 tracking-tight">
+                  {content[step].title}
+                </h2>
+                <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                  {content[step].description}
+                </p>
               </motion.div>
             </div>
           ))}

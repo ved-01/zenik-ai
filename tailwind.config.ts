@@ -112,15 +112,27 @@ export default {
 				},
 				gradient: {
 					'0%': {
-						'background-size': '200% 100%',
+						'background-size': '200% 200%',
 						'background-position': '0% 0%'
 					},
-					'50%': {
-						'background-size': '200% 100%',
+					'20%': {
+						'background-size': '200% 200%',
+						'background-position': '50% 0%'
+					},
+					'40%': {
+						'background-size': '200% 200%',
 						'background-position': '100% 0%'
 					},
+					'60%': {
+						'background-size': '200% 200%',
+						'background-position': '100% 100%'
+					},
+					'80%': {
+						'background-size': '200% 200%',
+						'background-position': '50% 100%'
+					},
 					'100%': {
-						'background-size': '200% 100%',
+						'background-size': '200% 200%',
 						'background-position': '0% 0%'
 					}
 				}
@@ -128,8 +140,8 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'grid': 'grid 20s linear infinite',
-				'gradient': 'gradient 8s ease-in-out infinite'
+				'grid': 'grid 20s infinite',
+				'gradient': 'gradient 8s infinite'
 			}
 		}
 	},

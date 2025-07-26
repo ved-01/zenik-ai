@@ -3,7 +3,7 @@ import logoSvg from "../assets/logo.svg";
 
 export const NavLogo = () => {
   return (
-    <div className="absolute top-7 left-10 z-50 flex items-center">
+    <div className="absolute top-7 left-10 z-[60] flex items-center">
       <div className="flex items-center gap-2">
         <img 
           src={logoSvg} 
