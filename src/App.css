@@ -1,8 +1,9 @@
 #root {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
+  overflow-x: hidden;
 }
 
 .logo {
@@ -40,3 +41,32 @@
 .read-the-docs {
   color: #888;
 }
+
+/* Scroll Snap Styles */
+.snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+  scroll-behavior: smooth;
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.snap-container::-webkit-scrollbar {
+  display: none;
+}
+
+.snap-section {
+  scroll-snap-align: start;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Don't modify Section3's height which has its own scroll behavior */
+.snap-section.preserve-height {
+  height: auto;
+  min-height: 100vh;
+}
+

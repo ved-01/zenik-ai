@@ -35,7 +35,7 @@ export function Footer() {
   ]
 
   return (
-    <footer className="bg-gradient-to-br from-primary/5 to-accent-violet/5 border-t border-border">
+    <footer className="bg-gradient-to-br from-primary/5 to-accent-violet/5 border-t border-border min-h-screen flex items-center">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-6xl mx-auto">
           {/* Main Footer Content */}

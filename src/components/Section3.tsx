@@ -91,10 +91,12 @@ export const AIJourneySection: React.FC = () => {
     offset: ["start start", "end start"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-200%"]);
+  // Adjust transform to only go to -100% since we want to show 2 transitions between 3 sections
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"]);
 
   return (
-    <section ref={containerRef} className="h-[300vh] relative">
+    // Keep height setting to ensure horizontal animation works properly
+    <section ref={containerRef} className="h-[350vh] relative w-full">
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         <motion.div
           style={{ x }}

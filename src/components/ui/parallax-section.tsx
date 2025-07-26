@@ -24,22 +24,24 @@ export function ParallaxSection({
     offset: offset
   })
 
+  // Reduce the range of movement to make sure content stays more visible with snap
   const y = useTransform(
     scrollYProgress,
     [0, 1],
     direction === 'up' 
-      ? [`${speed * 100}px`, `-${speed * 100}px`] 
-      : [`-${speed * 100}px`, `${speed * 100}px`]
+      ? [`${speed * 50}px`, `-${speed * 50}px`] 
+      : [`-${speed * 50}px`, `${speed * 50}px`]
   )
 
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95])
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.8, 1, 1, 0.8])
+  // Adjust the scale and opacity changes to be more subtle for snap scrolling
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.98, 1, 0.98])
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0.9, 1, 1, 0.9])
 
   return (
     <motion.div
       ref={ref}
       style={{ y, scale, opacity }}
-      className={cn("will-change-transform", className)}
+      className={cn("will-change-transform h-full w-full flex items-center justify-center", className)}
     >
       {children}
     </motion.div>

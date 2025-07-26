@@ -109,12 +109,27 @@ export default {
 					'100%': {
 						transform: 'translateY(calc(var(--cell-size) * -1))'
 					}
+				},
+				gradient: {
+					'0%': {
+						'background-size': '200% 100%',
+						'background-position': '0% 0%'
+					},
+					'50%': {
+						'background-size': '200% 100%',
+						'background-position': '100% 0%'
+					},
+					'100%': {
+						'background-size': '200% 100%',
+						'background-position': '0% 0%'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'grid': 'grid 20s linear infinite'
+				'grid': 'grid 20s linear infinite',
+				'gradient': 'gradient 8s ease-in-out infinite'
 			}
 		}
 	},

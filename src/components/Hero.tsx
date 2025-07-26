@@ -61,7 +61,7 @@ export function Hero() {
         <div className="space-y-5 max-w-3xl mx-auto text-center">
           
           <div className="flex flex-col items-center">
-            <span className="block text-6xl md:text-7xl lg:text-8xl text-gray-300 font-normal tracking-tight leading-tight">
+            <span className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text animate-gradient">
               We are not an AI
             </span>
             
@@ -99,10 +99,10 @@ export function Hero() {
               </AnimatePresence>
             </div>
             
-            <span className="block text-6xl md:text-7xl lg:text-8xl text-gray-300 font-normal tracking-tight leading-tight mb-6 md:mb-8">
+            <span className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight mb-6 md:mb-8 bg-gradient-to-r from-white to-gray-300 text-transparent bg-clip-text animate-gradient">
               Company
             </span>
-            <span className="block text-xl md:text-2xl text-gray-400 font-normal tracking-tight leading-tight">
+            <span className="block text-xl md:text-2xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient">
               We are all of the above.
             </span>
           </div>

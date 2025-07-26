@@ -39,28 +39,39 @@ const Index = () => {
             {/* Single GradientWave for all sections */}
             <GradientWave />
             
-            {/* Sections with parallax effects */}
-            <div className="relative z-10">
-              <ParallaxSection speed={0.3} direction="down">
-                <Hero />
-              </ParallaxSection>
+            {/* Sections with scroll snap and parallax effects */}
+            <div className="snap-container relative z-10">
+              <div className="snap-section">
+                <ParallaxSection speed={0.3} direction="down">
+                  <Hero />
+                </ParallaxSection>
+              </div>
               
-              <ParallaxSection speed={0.5} direction="up">
-                <Section2 />
-              </ParallaxSection>
+              <div className="snap-section">
+                <ParallaxSection speed={0.5} direction="up">
+                  <Section2 />
+                </ParallaxSection>
+              </div>
 
-              <ParallaxSection speed={0.5} direction="up">
-                <AIJourneyIntroSection />
-              </ParallaxSection>
+              <div className="snap-section">
+                <ParallaxSection speed={0.5} direction="up">
+                  <AIJourneyIntroSection />
+                </ParallaxSection>
+              </div>
 
-              {/* AIJourneySection has its own internal animation logic, so don't wrap it */}
-              <AIJourneySection  />
+              {/* AIJourneySection has its own internal animation logic, preserve it */}
+              <div className="snap-section preserve-height">
+                <AIJourneySection />
+              </div>
+              
+              {/* Add additional sections if needed */}
+              <div className="snap-section">
+                <Footer />
+              </div>
             </div>
           </motion.main>
         )}
       </AnimatePresence>
-      
-      {showMainContent && <Footer />}
     </div>
   );
 };
