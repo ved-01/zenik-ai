@@ -296,43 +296,45 @@ export const PricingCard = ({
   planName, description, price, features, buttonText, isPopular = false, buttonVariant = 'primary'
 }: PricingCardProps) => {
   const cardClasses = `
-    backdrop-blur-[14px] bg-gradient-to-br rounded-2xl shadow-xl flex-1 max-w-xs px-7 py-8 flex flex-col transition-all duration-300
-    from-black/5 to-black/0 border border-black/10
-    dark:from-white/10 dark:to-white/5 dark:border-white/10 dark:backdrop-brightness-[0.91]
-    ${isPopular ? 'scale-105 relative ring-2 ring-cyan-400/20 dark:from-white/20 dark:to-white/10 dark:border-cyan-400/30 shadow-2xl' : ''}
+    backdrop-blur-[25px] bg-gradient-to-br rounded-3xl shadow-2xl flex-1 max-w-[280px] px-5 py-5 flex flex-col transition-all duration-500
+    from-white/8 via-white/3 to-white/1 border border-white/15
+    dark:from-white/12 dark:via-white/5 dark:to-white/2 dark:border-white/20
+    hover:from-white/12 hover:via-white/5 hover:to-white/2 hover:border-white/25
+    dark:hover:from-white/15 dark:hover:via-white/8 dark:hover:to-white/3 dark:hover:border-white/30
+    ${isPopular ? 'scale-105 relative ring-2 ring-green-400/25 dark:ring-green-400/35 shadow-green-400/15' : ''}
   `;
   const buttonClasses = `
-    mt-auto w-full py-2.5 rounded-xl font-semibold text-[14px] transition font-sans
+    mt-auto w-full py-2 rounded-xl font-semibold text-[12px] transition-all duration-300 font-sans backdrop-blur-[20px]
     ${buttonVariant === 'primary' 
-      ? 'bg-cyan-400 hover:bg-cyan-300 text-foreground' 
-      : 'bg-black/10 hover:bg-black/20 text-foreground border border-black/20 dark:bg-white/10 dark:hover:bg-white/20 dark:text-white dark:border-white/20'
+      ? 'bg-gradient-to-r from-green-400/15 to-green-500/20 hover:from-green-400/25 hover:to-green-500/30 text-foreground border border-green-400/20 hover:border-green-400/30' 
+      : 'bg-white/5 hover:bg-white/10 text-foreground border border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:text-white dark:border-white/10'
     }
   `;
 
   return (
-    <div className={cardClasses.trim()}>
+    <div className={`${cardClasses.trim()} relative before:absolute before:inset-0 before:rounded-3xl before:bg-gradient-to-br before:from-white/3 before:to-transparent before:pointer-events-none`}>
       {isPopular && (
-        <div className="absolute -top-4 right-4 px-3 py-1 text-[12px] font-semibold rounded-full bg-cyan-400 text-foreground dark:text-black">
+        <div className="absolute -top-4 right-4 px-3 py-1 text-[12px] font-semibold rounded-full bg-gradient-to-r from-green-400/75 to-green-500/75 text-foreground dark:text-black backdrop-blur-[15px] border border-white/15">
           Most Popular
         </div>
       )}
-      <div className="mb-3">
-        <h2 className="text-[48px] font-extralight tracking-[-0.03em] text-foreground font-display">{planName}</h2>
-        <p className="text-[16px] text-foreground/70 mt-1 font-sans">{description}</p>
+      <div className="mb-2">
+        <h2 className="text-[24px] font-extralight tracking-[-0.03em] text-foreground font-display">{planName}</h2>
+        <p className="text-[12px] text-foreground/70 mt-1 font-sans">{description}</p>
       </div>
-      <div className="my-6 flex items-baseline gap-2">
-        <span className="text-[48px] font-extralight text-foreground font-display">${price}</span>
-        {price !== 'Custom' && <span className="text-[14px] text-foreground/70 font-sans">/mo</span>}
+      <div className="my-3 flex items-baseline gap-2">
+        <span className="text-[24px] font-extralight text-foreground font-display">${price}</span>
+        {price !== 'Custom' && <span className="text-[10px] text-foreground/70 font-sans">/mo</span>}
       </div>
-      <div className="card-divider w-full mb-5 h-px bg-[linear-gradient(90deg,transparent,rgba(0,0,0,0.1)_50%,transparent)] dark:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.09)_20%,rgba(255,255,255,0.22)_50%,rgba(255,255,255,0.09)_80%,transparent)]"></div>
-      <ul className="flex flex-col gap-2 text-[14px] text-foreground/90 mb-6 font-sans">
+      <div className="card-divider w-full mb-3 h-px bg-[linear-gradient(90deg,transparent,rgba(0,0,0,0.1)_50%,transparent)] dark:bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.09)_20%,rgba(255,255,255,0.22)_50%,rgba(255,255,255,0.09)_80%,transparent)]"></div>
+      <ul className="flex flex-col gap-1 text-[11px] text-foreground/90 mb-3 font-sans">
         {features.map((feature, index) => (
-          <li key={index} className="flex items-center gap-2">
-            <CheckIcon className="text-cyan-400 w-4 h-4" /> {feature}
+          <li key={index} className="flex items-center gap-1.5">
+            <CheckIcon className="text-green-400 w-2.5 h-2.5" /> {feature}
           </li>
         ))}
       </ul>
-      <RippleButton className={buttonClasses.trim()}>{buttonText}</RippleButton>
+      <RippleButton variant="ghost" className={buttonClasses.trim()}>{buttonText}</RippleButton>
     </div>
   );
 };
@@ -372,14 +374,11 @@ const pricingPlans: PricingCardProps[] = [
     description: 'Complete enterprise solution', 
     price: 'Custom', 
     features: [
-      'Includes all Business Partner features, plus:',
       'Dedicated Project Manager',
-      'Weekly 60 minute meetings with our executive team',
+      'Weekly executive meetings',
       'Strategic roadmap review',
-      'Team training and enablement sessions',
-      'Documentation of all completed work',
-      'Quarterly executive briefing',
-      'Everything customized for you and your business'
+      'Team training sessions',
+      'Quarterly executive briefing'
     ], 
     buttonText: 'Contact Sales', 
     buttonVariant: 'primary' 
@@ -388,7 +387,7 @@ const pricingPlans: PricingCardProps[] = [
 
 export const PricingSection = () => {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center relative bg-background text-foreground overflow-hidden">
+    <div className="h-full w-full flex items-center justify-center relative text-foreground overflow-hidden">
       <style>{`
         :root {
           --button-ripple-color: oklch(0.145 0 0 / 0.3);
@@ -398,16 +397,16 @@ export const PricingSection = () => {
         }
       `}</style>
       
-      <main className="relative w-full min-h-screen flex flex-col items-center justify-center px-4 py-8">
-        <div className="w-full max-w-5xl mx-auto text-center mb-14">
-          <h1 className="text-[48px] md:text-[64px] font-extralight leading-tight tracking-[-0.03em] bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-cyan-500 to-blue-600 dark:from-white dark:via-cyan-300 dark:to-blue-400 font-display">
-            Choose Your <span className="text-cyan-400">Partnership</span> Level
+      <main className="relative w-full h-full flex flex-col items-center justify-center px-4 py-8">
+        <div className="w-full max-w-5xl mx-auto text-center mb-12">
+          <h1 className="text-[32px] md:text-[48px] font-normal tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-green-500 to-green-600 dark:from-white dark:via-green-300 dark:to-green-400 animate-gradient">
+            Choose Your <span className="text-green-400">Partnership</span> Level
           </h1>
-          <p className="mt-3 text-[16px] md:text-[20px] text-foreground/80 max-w-2xl mx-auto font-sans">
+          <p className="mt-2 text-[14px] md:text-[16px] font-normal tracking-tight leading-tight text-center bg-gradient-to-r from-white to-gray-500 text-transparent bg-clip-text animate-gradient max-w-2xl mx-auto">
             Tailored solutions for businesses ready to transform with AI
           </p>
         </div>
-        <div className="flex flex-col md:flex-row gap-8 md:gap-6 justify-center items-center w-full max-w-4xl">
+        <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center items-center w-full max-w-4xl">
           {pricingPlans.map((plan) => <PricingCard key={plan.planName} {...plan} />)}
         </div>
       </main>

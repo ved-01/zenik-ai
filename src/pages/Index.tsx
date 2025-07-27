@@ -2,6 +2,7 @@ import { Hero } from "@/components/Hero"
 import { Section2 } from "@/components/Section2"
 // import { AIJourneySection } from "@/components/Section3"
 import { AIJourneyIntroSection } from "@/components/Section4"
+import { AITransformationSteps } from "@/components/AITransformationSteps"
 import { PricingSection } from "@/components/PricingSection"
 import { Section5 } from "@/components/Section5"
 import { InfiniteLogoCarousel } from "@/components/Section6"
@@ -63,11 +64,21 @@ const Index = () => {
         </div>
 
         <div className="snap-section" style={{ height: '100vh', scrollSnapAlign: 'start' }}>
-          <PricingSection />
+          <ParallaxSection speed={0.5} direction="up">
+            <AITransformationSteps />
+          </ParallaxSection>
         </div>
 
         <div className="snap-section" style={{ height: '100vh', scrollSnapAlign: 'start' }}>
-          <Section5 />
+          <ParallaxSection speed={0.5} direction="up">
+            <Section5 />
+          </ParallaxSection>
+        </div>
+
+        <div className="snap-section" style={{ height: '100vh', scrollSnapAlign: 'start' }}>
+          <ParallaxSection speed={0.5} direction="up">
+            <PricingSection />
+          </ParallaxSection>
         </div>
         
         {/* <div className="snap-section" style={{ height: '100vh', scrollSnapAlign: 'start' }}>

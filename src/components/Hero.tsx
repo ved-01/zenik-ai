@@ -43,41 +43,6 @@ const letterAnimation: Variants = {
   },
 };
 
-// Custom wave animation styles
-const waveTextStyle = {
-  background: 'linear-gradient(90deg, #ffffff 0%, #e5e7eb 25%, #d1d5db 50%, #9ca3af 75%, #6b7280 100%)',
-  backgroundSize: '400% 100%',
-  backgroundClip: 'text',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  animation: 'waveFlow 6s ease-in-out infinite',
-};
-
-// Add the keyframes to the document
-if (typeof document !== 'undefined') {
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes waveFlow {
-      0% {
-        background-position: 0% 50%;
-      }
-      25% {
-        background-position: 50% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      75% {
-        background-position: 50% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-  `;
-  document.head.appendChild(style);
-}
-
 export function Hero() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
@@ -120,10 +85,7 @@ export function Hero() {
         <div className="relative h-full max-w-screen-xl mx-auto px-4 flex items-center justify-center md:px-8">
           <div className="space-y-5 max-w-3xl mx-auto text-center">
             <div className="flex flex-col items-center">
-              <span
-                className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight"
-                style={waveTextStyle}
-              >
+              <span className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient">
                 We are not an AI
               </span>
 
@@ -161,16 +123,10 @@ export function Hero() {
                 </AnimatePresence>
               </div>
 
-              <span
-                className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight mb-6 md:mb-8"
-                style={waveTextStyle}
-              >
+              <span className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight mb-6 md:mb-8 bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient">
                 Company
               </span>
-              <span
-                className="block text-xl md:text-2xl font-normal tracking-tight leading-tight"
-                style={waveTextStyle}
-              >
+              <span className="block text-xl md:text-2xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-500 text-transparent bg-clip-text animate-gradient">
                 We are all of the above.
               </span>
             </div>

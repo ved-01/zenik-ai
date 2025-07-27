@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 
 export const GradientWave = () => {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       {/* Large sweeping wave */}
       <motion.div
-        className="absolute w-[200vw] h-[200vh] opacity-[0.16]"
+        className="absolute w-[200vw] h-[200vh] opacity-[0.25]"
         style={{
           background: "radial-gradient(circle at 60% 40%, rgba(74, 222, 128, 0.4) 0%, rgba(34, 197, 94, 0.3) 30%, rgba(0,0,0,0.99) 70%)",
           filter: "blur(80px)",
@@ -25,7 +25,7 @@ export const GradientWave = () => {
 
       {/* Medium flowing elements */}
       <motion.div
-        className="absolute w-[150vw] h-[150vh] opacity-[0.11]"
+        className="absolute w-[150vw] h-[150vh] opacity-[0.18]"
         style={{
           background: "conic-gradient(from 180deg at 30% 70%, rgba(74, 222, 128,0.3) 0%, rgba(34, 197, 94,0.2) 45%, rgba(0,0,0,0.99) 75%)",
           filter: "blur(60px)",
@@ -44,7 +44,7 @@ export const GradientWave = () => {
 
       {/* Small accent waves */}
       <motion.div
-        className="absolute w-[100vw] h-[100vh] opacity-[0.06]"
+        className="absolute w-[100vw] h-[100vh] opacity-[0.12]"
         style={{
           background: "linear-gradient(45deg, rgba(74,222,128,0.4) 0%, rgba(34,197,94,0.3) 25%, rgba(74,222,128,0.4) 50%, rgba(34,197,94,0.2) 75%, rgba(0,0,0,0.99) 100%)",
           filter: "blur(80px)",
