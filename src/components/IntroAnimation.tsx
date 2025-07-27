@@ -4,9 +4,9 @@ import logoSvg from "../assets/logo.svg";
 
 // Your actual logo component using the SVG file
 const Logo = ({ className, style }: { className: string; style?: React.CSSProperties }) => (
-  <img 
-    src={logoSvg} 
-    alt="Zenik AI Logo" 
+  <img
+    src={logoSvg}
+    alt="Zenik AI Logo"
     className={className}
     style={style}
   />
@@ -35,11 +35,11 @@ export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: 
       scale: 1, // Keep original size during text reveal
     },
     moveToTopLeft: {
-      top: '32px',
-      left: '40px',
+      top: '-8px',
+      left: '-15px',
       x: '0%',
       y: '0%',
-      scale: 0.35, // Only scale down when moving to navbar
+      scale: 0.5, // Only scale down when moving to navbar
       transition: {
         duration: 1.6,
         ease: [0.76, 0, 0.24, 1],
@@ -49,7 +49,7 @@ export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: 
 
   // Variants for the text reveal animation
   const textRevealVariants: Variants = {
-    hidden: { 
+    hidden: {
       width: 0,
       opacity: 0,
     },
@@ -68,6 +68,7 @@ export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: 
   const logoContainerVariants: Variants = {
     hidden: {},
     visible: {
+      scale: 1.35,
       transition: {
         staggerChildren: 0.35,
       },
@@ -94,7 +95,7 @@ export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: 
   const handleTextAnimationComplete = () => {
     setTimeout(() => {
       setAnimationStage(1); // Move to navbar position with scaling
-    }, 500);
+    }, 300);
   };
 
   // Handle position animation completion - this triggers the final fade out
@@ -129,13 +130,14 @@ export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: 
               handleFinalFadeComplete();
             }
           }}
-          transition={{ 
+          transition={{
             duration: 0.8,
             ease: "easeInOut"
           }}
         >
+          {/* 3D Unfolding Logo Structure - Stays large during text reveal */}
           <motion.div
-            className="fixed z-50 flex items-center"
+            className="fixed z-50 flex items-center gap-8"
             variants={containerVariants}
             initial="initial"
             animate={animationStage >= 1 ? 'moveToTopLeft' : 'initial'}
@@ -145,51 +147,50 @@ export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: 
               }
             }}
           >
-            <motion.div className="flex items-center justify-center gap-3">
-              {/* 3D Unfolding Logo Structure - Stays large during text reveal */}
+            <motion.div
+              className="relative h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28"
+              style={{ perspective: '800px' }}
+              variants={logoContainerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {/* Panel 1 (Left third) */}
               <motion.div
-                className="relative h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28"
-                style={{ perspective: '800px' }}
-                variants={logoContainerVariants}
-                initial="hidden"
-                animate="visible"
+                className="absolute top-0 left-0 w-full h-full"
+                style={{ clipPath: 'polygon(0 0, 33.33% 0, 33.33% 100%, 0% 100%)' }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.1 }}
               >
-                {/* Panel 1 (Left third) */}
-                <motion.div
-                  className="absolute top-0 left-0 w-full h-full"
-                  style={{ clipPath: 'polygon(0 0, 33.33% 0, 33.33% 100%, 0% 100%)' }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.1 }}
-                >
-                  <Logo className="h-full w-full object-contain" style={{}} />
-                </motion.div>
-
-                {/* Panel 2 (Middle third) */}
-                <motion.div
-                  className="absolute top-0 left-0 w-full h-full"
-                  style={{
-                    clipPath: 'polygon(33.33% 0, 66.66% 0, 66.66% 100%, 33.33% 100%)',
-                    transformOrigin: '33.33% 50%',
-                  }}
-                  variants={panelVariants}
-                >
-                  <Logo className="h-full w-full object-contain" style={{}} />
-                </motion.div>
-
-                {/* Panel 3 (Right third) */}
-                <motion.div
-                  className="absolute top-0 left-0 w-full h-full"
-                  style={{
-                    clipPath: 'polygon(66.66% 0, 100% 0, 100% 100%, 66.66% 100%)',
-                    transformOrigin: '66.66% 50%',
-                  }}
-                  variants={panelVariants}
-                >
-                  <Logo className="h-full w-full object-contain" style={{}} />
-                </motion.div>
+                <Logo className="h-full w-full object-contain" style={{}} />
               </motion.div>
 
+              {/* Panel 2 (Middle third) */}
+              <motion.div
+                className="absolute top-0 left-0 w-full h-full"
+                style={{
+                  clipPath: 'polygon(33.33% 0, 66.66% 0, 66.66% 100%, 33.33% 100%)',
+                  transformOrigin: '33.33% 50%',
+                }}
+                variants={panelVariants}
+              >
+                <Logo className="h-full w-full object-contain" style={{}} />
+              </motion.div>
+
+              {/* Panel 3 (Right third) */}
+              <motion.div
+                className="absolute top-0 left-0 w-full h-full"
+                style={{
+                  clipPath: 'polygon(66.66% 0, 100% 0, 100% 100%, 66.66% 100%)',
+                  transformOrigin: '66.66% 50%',
+                }}
+                variants={panelVariants}
+              >
+                <Logo className="h-full w-full object-contain" style={{}} />
+              </motion.div>
+            </motion.div>
+
+            <motion.div className="flex items-center justify-center gap-10">
               {/* Text reveal container - Appears while logo stays large */}
               <motion.div
                 className="overflow-hidden"
@@ -198,7 +199,7 @@ export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: 
                 animate="visible"
                 onAnimationComplete={handleTextAnimationComplete}
               >
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600 whitespace-nowrap">
+                <h1 className="text-[32px] md:text-[48px] font-bold tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-green-400 animate-gradient whitespace-nowrap text-lg font-singapore-sling">
                   zenik
                 </h1>
               </motion.div>
