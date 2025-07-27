@@ -1,6 +1,7 @@
-
+import { useContactForm } from '@/contexts/ContactFormContext';
 
 export function Footer() {
+  const { openForm } = useContactForm();
 
   return (
     <footer className="min-h-screen flex items-center relative">
@@ -26,7 +27,10 @@ export function Footer() {
             
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <button className="group relative inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-transparent border-2 border-white/30 rounded-full transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3),0_0_40px_rgba(255,255,255,0.2)]">
+              <button 
+                onClick={openForm}
+                className="group relative inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-transparent border-2 border-white/30 rounded-full transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3),0_0_40px_rgba(255,255,255,0.2)]"
+              >
                 <span className="relative z-10 flex items-center gap-2">
                   Get in Touch
                   <svg 

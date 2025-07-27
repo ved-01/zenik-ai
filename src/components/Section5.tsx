@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useContactForm } from '@/contexts/ContactFormContext';
 
 interface Section5Props extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -6,6 +7,8 @@ export const Section5: React.FC<Section5Props> = ({
   className,
   ...props 
 }) => {
+  const { openForm } = useContactForm();
+
   return (
     <div 
       className={`relative h-screen overflow-hidden ${className || ''}`}
@@ -28,7 +31,10 @@ export const Section5: React.FC<Section5Props> = ({
           
           {/* Button with white fill and black text on hover */}
           <div className="pt-8">
-            <button className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-transparent border-2 border-white/30 rounded-full transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3),0_0_40px_rgba(255,255,255,0.2)]">
+            <button 
+              onClick={openForm}
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-transparent border-2 border-white/30 rounded-full transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3),0_0_40px_rgba(255,255,255,0.2)]"
+            >
               <span className="relative z-10 flex items-center gap-2">
                 Let's Partner Up
                 <svg 

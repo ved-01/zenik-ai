@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { cn } from "@/lib/utils";
-import { ContactForm } from './ContactForm';
+import { useContactForm } from '@/contexts/ContactFormContext';
 
 
 const animatedWords = ['Education', 'Business', 'Development'];
@@ -46,7 +46,7 @@ const letterAnimation: Variants = {
 
 export function Hero() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [isContactFormOpen, setIsContactFormOpen] = useState(false);
+  const { openForm } = useContactForm();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -62,7 +62,7 @@ export function Hero() {
       {/* Top-right fixed button */}
       <div className="fixed top-6 right-6 z-50">
         <button 
-          onClick={() => setIsContactFormOpen(true)}
+          onClick={openForm}
           className="group relative inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-transparent border-2 border-white/30 rounded-full transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3),0_0_40px_rgba(255,255,255,0.2)]"
         >
           <span className="relative z-10 flex items-center gap-2">
@@ -138,11 +138,6 @@ export function Hero() {
           </div>
         </div>
       </div>
-
-      <ContactForm 
-        isOpen={isContactFormOpen} 
-        onClose={() => setIsContactFormOpen(false)} 
-      />
     </>
   );
 }

@@ -11,6 +11,7 @@ import { NavLogo } from "@/components/NavLogo"
 import { IntroAnimation } from "@/components/IntroAnimation"
 import { GradientWave } from "@/components/ui/animated-gradient-wave"
 import { ParallaxSection } from "@/components/ui/parallax-section"
+import { ContactForm } from "@/components/ContactForm"
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -23,10 +24,6 @@ const Index = () => {
     setShowMainContent(true);
     setShowNavLogo(true);
   };
-
-
-
-
 
   return (
     <div className="min-h-screen bg-background">
@@ -92,6 +89,9 @@ const Index = () => {
 
       {/* Single GradientWave for all sections */}
       <GradientWave />
+
+      {/* Global Contact Form */}
+      <ContactForm />
 
       {/* Navigation components - only show after intro */}
       <AnimatePresence>

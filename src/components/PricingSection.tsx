@@ -297,14 +297,14 @@ export const PricingCard = ({
 }: PricingCardProps) => {
   const cardClasses = `
     backdrop-blur-[25px] bg-gradient-to-br rounded-3xl shadow-2xl flex-1 max-w-[280px] px-5 py-5 flex flex-col transition-all duration-500
-    from-white/8 via-white/3 to-white/1 border border-white/15
-    dark:from-white/12 dark:via-white/5 dark:to-white/2 dark:border-white/20
-    hover:from-white/12 hover:via-white/5 hover:to-white/2 hover:border-white/25
-    dark:hover:from-white/15 dark:hover:via-white/8 dark:hover:to-white/3 dark:hover:border-white/30
-    ${isPopular ? 'scale-105 relative ring-2 ring-green-400/25 dark:ring-green-400/35 shadow-green-400/15' : ''}
+    from-white/8 via-white/3 to-white/1
+    dark:from-white/12 dark:via-white/5 dark:to-white/2
+    hover:from-white/12 hover:via-white/5 hover:to-white/2
+    dark:hover:from-white/15 dark:hover:via-white/8 dark:hover:to-white/3
+    ${isPopular ? 'scale-105 relative shadow-green-400/15 animated-border' : 'border border-white/15 dark:border-white/20 hover:border-white/25 dark:hover:border-white/30'}
   `;
   const buttonClasses = `
-    mt-auto w-full py-2 rounded-xl font-semibold text-[12px] transition-all duration-300 font-sans backdrop-blur-[20px]
+    mt-auto w-full py-2 rounded-xl text-[12px] transition-all duration-300 font-sans backdrop-blur-[20px]
     ${buttonVariant === 'primary' 
       ? 'bg-gradient-to-r from-green-400/15 to-green-500/20 hover:from-green-400/25 hover:to-green-500/30 text-foreground border border-green-400/20 hover:border-green-400/30' 
       : 'bg-white/5 hover:bg-white/10 text-foreground border border-white/10 dark:bg-white/5 dark:hover:bg-white/10 dark:text-white dark:border-white/10'
@@ -394,6 +394,53 @@ export const PricingSection = () => {
         }
         .dark {
           --button-ripple-color: oklch(0.985 0 0 / 0.5);
+        }
+        
+        @keyframes borderRotate {
+          0% {
+            background: conic-gradient(from 0deg, transparent, #4ade80, transparent);
+          }
+          25% {
+            background: conic-gradient(from 90deg, transparent, #4ade80, transparent);
+          }
+          50% {
+            background: conic-gradient(from 180deg, transparent, #4ade80, transparent);
+          }
+          75% {
+            background: conic-gradient(from 270deg, transparent, #4ade80, transparent);
+          }
+          100% {
+            background: conic-gradient(from 360deg, transparent, #4ade80, transparent);
+          }
+        }
+        
+        @keyframes borderPulse {
+          0%, 100% {
+            opacity: 0.3;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.8;
+            transform: scale(1.02);
+          }
+        }
+        
+        .animated-border {
+          position: relative;
+        }
+        
+        .animated-border::before {
+          content: '';
+          position: absolute;
+          inset: -2px;
+          border-radius: 1.5rem;
+          padding: 2px;
+          background: conic-gradient(from 0deg, transparent, #4ade80, transparent);
+          animation: borderRotate 3s linear infinite, borderPulse 2s ease-in-out infinite;
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask-composite: exclude;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
         }
       `}</style>
       

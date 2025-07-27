@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { BackgroundPaths } from "./components/ui/background-paths";
+import { ContactFormProvider } from "./contexts/ContactFormContext";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -13,17 +14,19 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BackgroundPaths />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <ContactFormProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BackgroundPaths />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ContactFormProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );
