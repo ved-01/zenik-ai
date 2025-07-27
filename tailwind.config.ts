@@ -20,6 +20,7 @@ export default {
 		extend: {
 			fontFamily: {
 				inter: ['Inter', 'sans-serif'],
+				'singapore-sling': ['Singapore Sling', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',

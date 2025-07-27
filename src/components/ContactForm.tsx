@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -32,28 +32,24 @@ export function ContactForm() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    let scrollY = 0;
     let scrollContainer: HTMLElement | null = null;
     let timeoutId: NodeJS.Timeout;
   
     if (isOpen) {
       setIsMounted(true);
-      // Small delay to ensure the component is mounted before animation starts
-      timeoutId = setTimeout(() => setIsVisible(true), 50);
+      // Reduced delay for faster animation start
+      timeoutId = setTimeout(() => setIsVisible(true), 10);
       scrollContainer = document.querySelector('.snap-container') as HTMLElement;
       if (scrollContainer) {
-        scrollY = scrollContainer.scrollTop;
         scrollContainer.style.overflowY = 'hidden';
-        scrollContainer.style.scrollBehavior = 'auto';
       }
     } else {
       setIsVisible(false);
-      // Delay unmounting to allow exit animation to complete
-      timeoutId = setTimeout(() => setIsMounted(false), 500);
+      // Reduced delay for faster unmounting
+      timeoutId = setTimeout(() => setIsMounted(false), 200);
       scrollContainer = document.querySelector('.snap-container') as HTMLElement;
       if (scrollContainer) {
         scrollContainer.style.overflowY = 'scroll';
-        scrollContainer.style.scrollBehavior = 'smooth';
       }
     }
   
@@ -62,16 +58,15 @@ export function ContactForm() {
       scrollContainer = document.querySelector('.snap-container') as HTMLElement;
       if (scrollContainer) {
         scrollContainer.style.overflowY = 'scroll';
-        scrollContainer.style.scrollBehavior = 'smooth';
       }
     };
   }, [isOpen]);
 
-  const handleInputChange = (field: string, value: string) => {
+  const handleInputChange = useCallback((field: string, value: string) => {
     updateFormData(field, value);
-  };
+  }, [updateFormData]);
 
-  const handleFieldBlur = (field: string) => {
+  const handleFieldBlur = useCallback((field: string) => {
     updateTouchedFields(field, true);
     
     // Validate email when it loses focus
@@ -83,9 +78,9 @@ export function ContactForm() {
         setEmailError('');
       }
     }
-  };
+  }, [formData.email, updateTouchedFields, setEmailError]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = useCallback((e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate email format
@@ -93,18 +88,6 @@ export function ContactForm() {
     if (formData.email && !emailRegex.test(formData.email)) {
       setEmailError('Please enter a valid email address');
       updateTouchedFields('email', true);
-      
-      // Vibrate email asterisk
-      const fieldElement = document.querySelector('[data-field="email"]');
-      if (fieldElement) {
-        const asterisk = fieldElement.querySelector('.required-asterisk');
-        if (asterisk) {
-          asterisk.classList.add('animate-pulse', 'animate-bounce');
-          setTimeout(() => {
-            asterisk.classList.remove('animate-pulse', 'animate-bounce');
-          }, 1000);
-        }
-      }
       return;
     }
     
@@ -117,21 +100,6 @@ export function ContactForm() {
       missingFields.forEach(field => {
         updateTouchedFields(field as keyof typeof touchedFields, true);
       });
-      
-      // Add vibration animation class only to missing field asterisks
-      missingFields.forEach(field => {
-        const fieldElement = document.querySelector(`[data-field="${field}"]`);
-        if (fieldElement) {
-          const asterisk = fieldElement.querySelector('.required-asterisk');
-          if (asterisk) {
-            asterisk.classList.add('animate-pulse', 'animate-bounce');
-            setTimeout(() => {
-              asterisk.classList.remove('animate-pulse', 'animate-bounce');
-            }, 1000); // Remove after 1 second
-          }
-        }
-      });
-      
       return; // Don't submit the form
     }
     
@@ -145,33 +113,33 @@ export function ContactForm() {
     });
     
     closeForm();
-  };
+  }, [formData, setEmailError, updateTouchedFields, touchedFields, toast, closeForm]);
 
-  const handleMinimize = () => {
+  const handleMinimize = useCallback(() => {
     console.log('Form minimized with data:', formData);
     closeForm();
-  };
+  }, [formData, closeForm]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     // Clear all form data
     clearForm();
     closeForm();
-  };
+  }, [clearForm, closeForm]);
 
   if (!isMounted) return null;
 
   return (
     <>
-      {/* Blurry overlay */}
+      {/* Simplified overlay without backdrop blur */}
       <div 
-        className={`fixed inset-0 z-40 bg-black/30 backdrop-blur-sm transition-all duration-500 ease-in-out ${
+        className={`fixed inset-0 z-40 bg-black/20 transition-opacity duration-200 ease-out ${
           isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
         onClick={closeForm}
       />
 
-      {/* Slide-in dialog on right */}
-      <div className={`fixed top-8 right-8 bottom-8 w-full max-w-2xl bg-white z-50 shadow-2xl flex flex-col transform transition-all duration-500 ease-in-out rounded-2xl ${
+      {/* Optimized slide-in dialog */}
+      <div className={`fixed top-8 right-8 bottom-8 w-full max-w-2xl bg-white z-50 shadow-xl flex flex-col transform transition-all duration-200 ease-out rounded-2xl ${
         isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
       }`}>
         {/* Header */}
@@ -182,7 +150,7 @@ export function ContactForm() {
           <div className="flex items-center gap-3">
             <button
               onClick={handleMinimize}
-              className="text-gray-500 hover:text-gray-700 transition-colors duration-200 focus:outline-none"
+              className="text-gray-500 hover:text-gray-700 transition-colors duration-150 focus:outline-none"
               title="Minimize (save data)"
             >
               <Minimize2 className="h-5 w-5" />
@@ -190,7 +158,7 @@ export function ContactForm() {
             </button>
           <button
               onClick={handleClose}
-              className="text-gray-500 hover:text-gray-700 transition-colors duration-200 focus:outline-none"
+              className="text-gray-500 hover:text-gray-700 transition-colors duration-150 focus:outline-none"
               title="Close (clear all data)"
           >
               <X className="h-6 w-6" />
@@ -209,7 +177,7 @@ export function ContactForm() {
                 <Label htmlFor="name" className="text-base font-normal text-gray-900">
                   What is your name?
                 </Label>
-                  <span className="text-red-500 required-asterisk">*</span>
+                  <span className="text-red-500">*</span>
                 </div>
                 <Input
                   id="name"
@@ -217,7 +185,7 @@ export function ContactForm() {
                   value={formData.name}
                   onChange={(e) => handleInputChange('name', e.target.value)}
                   onBlur={() => handleFieldBlur('name')}
-                  className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-transparent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-300 ease-in-out"
+                  className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-transparent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-150 ease-out"
                 />
                 {touchedFields.name && !formData.name && (
                   <p className="text-sm text-red-500">Required</p>
@@ -229,7 +197,7 @@ export function ContactForm() {
                 <Label htmlFor="email" className="text-base font-normal text-gray-900">
                   What is your email?
                 </Label>
-                  <span className="text-red-500 required-asterisk">*</span>
+                  <span className="text-red-500">*</span>
                 </div>
                 <Input
                   id="email"
@@ -238,7 +206,7 @@ export function ContactForm() {
                   value={formData.email}
                   onChange={(e) => handleInputChange('email', e.target.value)}
                   onBlur={() => handleFieldBlur('email')}
-                  className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-transparent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-300 ease-in-out"
+                  className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-transparent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-150 ease-out"
                 />
                 {touchedFields.email && !formData.email && (
                   <p className="text-sm text-red-500">Required</p>
@@ -259,7 +227,7 @@ export function ContactForm() {
                 placeholder="Enter role"
                 value={formData.role}
                 onChange={(e) => handleInputChange('role', e.target.value)}
-                className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-transparent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-300 ease-in-out"
+                className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-transparent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-150 ease-out"
               />
             </div>
 
@@ -274,7 +242,7 @@ export function ContactForm() {
                   placeholder="Enter company name"
                   value={formData.companyName}
                   onChange={(e) => handleInputChange('companyName', e.target.value)}
-                  className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-transparent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-300 ease-in-out"
+                  className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-transparent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-150 ease-out"
                 />
               </div>
 
@@ -287,7 +255,7 @@ export function ContactForm() {
                   placeholder="Enter company website"
                   value={formData.companyWebsite}
                   onChange={(e) => handleInputChange('companyWebsite', e.target.value)}
-                  className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-transparent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-300 ease-in-out"
+                  className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-transparent focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-150 ease-out"
                 />
               </div>
             </div>
@@ -299,10 +267,10 @@ export function ContactForm() {
                   <Label htmlFor="companySize" className="text-base font-normal text-gray-900">
                     Company Size
                   </Label>
-                  <span className="text-red-500 required-asterisk">*</span>
+                  <span className="text-red-500">*</span>
                 </div>
                 <Select value={formData.companySize} onValueChange={(value) => handleInputChange('companySize', value)} onOpenChange={(open) => !open && handleFieldBlur('companySize')}>
-                  <SelectTrigger className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 focus:border-gray-300 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none h-auto transition-colors duration-300 ease-in-out [&>span]:text-gray-400 [&>span:not([data-placeholder])]:text-gray-900">
+                  <SelectTrigger className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 focus:border-gray-300 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none h-auto transition-colors duration-150 ease-out [&>span]:text-gray-400 [&>span:not([data-placeholder])]:text-gray-900">
                     <SelectValue placeholder="Select company size" />
                   </SelectTrigger>
                   <SelectContent className="bg-white border-0 shadow-lg rounded-lg text-gray-900">
@@ -324,10 +292,10 @@ export function ContactForm() {
                   <Label htmlFor="annualRevenue" className="text-base font-normal text-gray-900">
                     Company's Annual Revenue
                   </Label>
-                  <span className="text-red-500 required-asterisk">*</span>
+                  <span className="text-red-500">*</span>
                 </div>
                 <Select value={formData.annualRevenue} onValueChange={(value) => handleInputChange('annualRevenue', value)} onOpenChange={(open) => !open && handleFieldBlur('annualRevenue')}>
-                  <SelectTrigger className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 focus:border-gray-300 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none h-auto transition-colors duration-300 ease-in-out [&>span]:text-gray-400 [&>span:not([data-placeholder])]:text-gray-900">
+                  <SelectTrigger className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 focus:border-gray-300 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none h-auto transition-colors duration-150 ease-out [&>span]:text-gray-400 [&>span:not([data-placeholder])]:text-gray-900">
                     <SelectValue placeholder="Select revenue range" />
                   </SelectTrigger>
                   <SelectContent className="bg-white border-0 shadow-lg rounded-lg text-gray-900">
@@ -351,10 +319,10 @@ export function ContactForm() {
                 <Label htmlFor="projectBudget" className="text-base font-normal text-gray-900">
                   Project budget
                 </Label>
-                <span className="text-red-500 required-asterisk">*</span>
+                <span className="text-red-500">*</span>
               </div>
                                             <Select value={formData.projectBudget} onValueChange={(value) => handleInputChange('projectBudget', value)} onOpenChange={(open) => !open && handleFieldBlur('projectBudget')}>
-                <SelectTrigger className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 focus:border-gray-300 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none h-auto transition-colors duration-300 ease-in-out [&>span]:text-gray-400 [&>span:not([data-placeholder])]:text-gray-900">
+                <SelectTrigger className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 focus:border-gray-300 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none h-auto transition-colors duration-150 ease-out [&>span]:text-gray-400 [&>span:not([data-placeholder])]:text-gray-900">
                   <SelectValue placeholder="Select budget range" />
                 </SelectTrigger>
                 <SelectContent className="bg-white border-0 shadow-lg rounded-lg text-gray-900">
@@ -377,7 +345,7 @@ export function ContactForm() {
                 What services are you interested in?
               </Label>
               <Select value={formData.services} onValueChange={(value) => handleInputChange('services', value)}>
-                <SelectTrigger className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 focus:border-gray-300 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none h-auto transition-colors duration-300 ease-in-out [&>span]:text-gray-400 [&>span:not([data-placeholder])]:text-gray-900">
+                <SelectTrigger className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 focus:border-gray-300 focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none h-auto transition-colors duration-150 ease-out [&>span]:text-gray-400 [&>span:not([data-placeholder])]:text-gray-900">
                   <SelectValue placeholder="Select service" />
                 </SelectTrigger>
                 <SelectContent className="bg-white border-0 shadow-lg rounded-lg text-gray-900">
@@ -399,7 +367,7 @@ export function ContactForm() {
                 placeholder="Enter a message"
                 value={formData.message}
                 onChange={(e) => handleInputChange('message', e.target.value)}
-                className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-gray-300 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-300 ease-in-out resize-y min-h-[100px]"
+                className="border-0 border-b-2 border-gray-300 bg-transparent rounded-none px-0 py-3 text-gray-900 placeholder:text-gray-400 focus:border-gray-300 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 shadow-none transition-colors duration-150 ease-out resize-y min-h-[100px]"
                 style={{ resize: 'vertical' }}
               />
             </div>
@@ -409,7 +377,7 @@ export function ContactForm() {
               <Button
                 type="submit"
                 onClick={handleSubmit}
-                className="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 px-6 rounded-lg font-medium transition-all duration-300 ease-in-out hover:scale-[1.02] hover:shadow-lg transform"
+                className="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 px-6 rounded-lg font-medium transition-all duration-150 ease-out hover:scale-[1.01] hover:shadow-lg transform"
               >
                 Send Enquiry
               </Button>

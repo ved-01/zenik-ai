@@ -36,7 +36,7 @@ export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: 
     },
     moveToTopLeft: {
       top: '-8px',
-      left: '-8px',
+      left: '-15px',
       x: '0%',
       y: '0%',
       scale: 0.5, // Only scale down when moving to navbar
@@ -199,7 +199,7 @@ export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: 
                 animate="visible"
                 onAnimationComplete={handleTextAnimationComplete}
               >
-                <h1 className="text-[32px] md:text-[48px] font-normal tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-green-400 animate-gradient whitespace-nowrap text-lg">
+                <h1 className="text-[32px] md:text-[48px] font-bold tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-green-400 animate-gradient whitespace-nowrap text-lg font-singapore-sling">
                   zenik
                 </h1>
               </motion.div>

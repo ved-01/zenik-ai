@@ -21,7 +21,7 @@ export function Footer() {
                 CONTACT
               </div>
               <div className="text-sm text-white">
-                ved@zenik.com
+                info@zenik.ai
               </div>
             </div>
             

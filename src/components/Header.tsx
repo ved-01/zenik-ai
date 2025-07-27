@@ -21,7 +21,7 @@ export function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <span className="text-2xl font-bold text-gradient-primary">
+            <span className="text-2xl font-bold text-gradient-primary font-singapore-sling">
               Zenik AI
             </span>
           </div>
