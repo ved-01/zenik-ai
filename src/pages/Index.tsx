@@ -2,6 +2,7 @@ import { Hero } from "@/components/Hero"
 import { Section2 } from "@/components/Section2"
 // import { AIJourneySection } from "@/components/Section3"
 import { AIJourneyIntroSection } from "@/components/Section4"
+import { PricingSection } from "@/components/PricingSection"
 import { Section5 } from "@/components/Section5"
 import { InfiniteLogoCarousel } from "@/components/Section6"
 import { Footer } from "@/components/Footer"
@@ -59,6 +60,10 @@ const Index = () => {
           <ParallaxSection speed={0.5} direction="up">
             <AIJourneyIntroSection />
           </ParallaxSection>
+        </div>
+
+        <div className="snap-section" style={{ height: '100vh', scrollSnapAlign: 'start' }}>
+          <PricingSection />
         </div>
 
         <div className="snap-section" style={{ height: '100vh', scrollSnapAlign: 'start' }}>
