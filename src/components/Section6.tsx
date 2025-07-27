@@ -1,5 +1,5 @@
 import React from 'react'
-import { HeroSection } from '@/components/ui/hero-section-dark'
+// import { HeroSection } from '@/components/ui/hero-section-dark'
 import { motion } from 'framer-motion'
 
 const partnerLogos = [
