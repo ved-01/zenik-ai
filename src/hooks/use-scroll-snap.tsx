@@ -8,8 +8,8 @@ interface UseScrollSnapOptions {
 
 export const useScrollSnap = ({ 
   sections, 
-  duration = 800, 
-  threshold = 50 
+  duration = 1200, // Increased from 800ms to 1200ms for slower scrolling
+  threshold = 80   // Increased from 50px to 80px for less sensitive touch scrolling
 }: UseScrollSnapOptions) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentSection, setCurrentSection] = useState(0);
@@ -28,7 +28,7 @@ export const useScrollSnap = ({
       if (containerRef.current) {
         containerRef.current.classList.remove('scrolling');
       }
-    }, 100);
+    }, 200); // Increased from 100ms to 200ms for slower scroll recovery
   }, []);
 
   // Smooth scroll to specific section
@@ -93,7 +93,7 @@ export const useScrollSnap = ({
     e.preventDefault();
     
     const now = Date.now();
-    if (now - lastScrollTime.current < 100) {
+    if (now - lastScrollTime.current < 200) { // Increased from 100ms to 200ms to slow down wheel scrolling
       console.log("Rapid scrolling prevented");
       return; // Prevent rapid scrolling
     }

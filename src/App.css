@@ -60,6 +60,9 @@
   /* Prevent scroll chaining and multiple page jumps */
   overscroll-behavior: contain;
   scroll-padding: 0;
+  
+  /* Slower scroll behavior */
+  transition: scroll-behavior 1.2s ease-in-out;
 }
 
 .snap-container::-webkit-scrollbar {
@@ -97,12 +100,19 @@
 /* Enhanced scroll snap behavior */
 .snap-container.smooth-scroll {
   scroll-behavior: smooth;
+  transition-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 
 /* Prevent scroll during animation */
 .snap-container.scrolling {
   scroll-behavior: auto;
   pointer-events: none;
+}
+
+/* Custom slow scroll behavior */
+.snap-container.slow-scroll {
+  scroll-behavior: smooth;
+  transition: all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 /* Animation classes for section transitions */

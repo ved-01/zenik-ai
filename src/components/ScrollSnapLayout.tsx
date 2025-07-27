@@ -31,7 +31,7 @@ export const ScrollSnapLayout: React.FC<ScrollSnapLayoutProps> = ({
       
       scrollTimeout.current = setTimeout(() => {
         isScrolling.current = false;
-      }, 150); // Debounce scroll events
+      }, 300); // Increased debounce time to slow down scroll intensity
     };
 
     container.addEventListener('scroll', handleScroll, { passive: true });
@@ -49,14 +49,15 @@ export const ScrollSnapLayout: React.FC<ScrollSnapLayoutProps> = ({
       {/* Scroll snap container - CSS only, no JavaScript interference */}
       <div 
         ref={containerRef}
-        className={`snap-container relative z-10 ${className}`}
+        className={`snap-container slow-scroll relative z-10 ${className}`}
         style={{ 
           height: '100vh', 
           overflowY: 'scroll',
           scrollSnapType: 'y mandatory',
           scrollBehavior: 'smooth',
           scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
+          msOverflowStyle: 'none',
+          transition: 'scroll-behavior 0.8s ease-in-out'
         }}
       >
         {children}
