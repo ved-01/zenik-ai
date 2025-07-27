@@ -44,9 +44,59 @@ const letterAnimation: Variants = {
   },
 };
 
+// Fade morph animation variants for the hero content
+const fadeMorphVariants: Variants = {
+  initial: {
+    opacity: 0,
+    scale: 0.95,
+    filter: 'blur(10px)',
+    y: 20,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+    y: 0,
+    transition: {
+      duration: 1.2,
+      ease: [0.25, 0.46, 0.45, 0.94],
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+// Stagger animation for hero elements
+const heroElementVariants: Variants = {
+  initial: {
+    opacity: 0,
+    y: 30,
+    filter: 'blur(5px)',
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.8,
+      ease: [0.25, 0.46, 0.45, 0.94],
+    },
+  },
+};
+
 export function Hero() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const { openForm } = useContactForm();
+
+  useEffect(() => {
+    // Trigger the fade morph animation after a short delay
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -60,7 +110,13 @@ export function Hero() {
   return (
     <>
       {/* Top-right fixed button */}
-      <div className="fixed top-6 right-6 z-50">
+      <motion.div 
+        className="fixed top-6 right-6 z-50"
+        variants={heroElementVariants}
+        initial="initial"
+        animate={isVisible ? "animate" : "initial"}
+        transition={{ delay: 0.8 }}
+      >
         <button 
           onClick={openForm}
           className="group relative inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-transparent border-2 border-white/30 rounded-full transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3),0_0_40px_rgba(255,255,255,0.2)]"
@@ -82,19 +138,32 @@ export function Hero() {
             </svg>
           </span>
         </button>
-      </div>
-
+      </motion.div>
 
       {/* Hero Section */}
       <div className="relative h-screen overflow-hidden">
-        <div className="relative h-full max-w-screen-xl mx-auto px-4 flex items-center justify-center md:px-8">
+        <motion.div 
+          className="relative h-full max-w-screen-xl mx-auto px-4 flex items-center justify-center md:px-8"
+          variants={fadeMorphVariants}
+          initial="initial"
+          animate={isVisible ? "animate" : "initial"}
+        >
           <div className="space-y-5 max-w-3xl mx-auto text-center">
-            <div className="flex flex-col items-center">
-              <span className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient">
+            <motion.div 
+              className="flex flex-col items-center"
+              variants={heroElementVariants}
+            >
+              <motion.span 
+                className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient"
+                variants={heroElementVariants}
+              >
                 We are not an AI
-              </span>
+              </motion.span>
 
-              <div className="h-20 md:h-24 lg:h-32 flex items-center justify-center my-4 md:my-6">
+              <motion.div 
+                className="h-20 md:h-24 lg:h-32 flex items-center justify-center my-4 md:my-6"
+                variants={heroElementVariants}
+              >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentWord}
@@ -126,17 +195,23 @@ export function Hero() {
                     ))}
                   </motion.div>
                 </AnimatePresence>
-              </div>
+              </motion.div>
 
-              <span className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight mb-6 md:mb-8 bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient">
+              <motion.span 
+                className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight mb-6 md:mb-8 bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient"
+                variants={heroElementVariants}
+              >
                 Company
-              </span>
-              <span className="block text-xl md:text-2xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-500 text-transparent bg-clip-text animate-gradient">
+              </motion.span>
+              <motion.span 
+                className="block text-xl md:text-2xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-500 text-transparent bg-clip-text animate-gradient"
+                variants={heroElementVariants}
+              >
                 We are all of the above.
-              </span>
-            </div>
+              </motion.span>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </>
   );

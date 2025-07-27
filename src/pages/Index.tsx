@@ -12,6 +12,7 @@ import { IntroAnimation } from "@/components/IntroAnimation"
 import { GradientWave } from "@/components/ui/animated-gradient-wave"
 import { ParallaxSection } from "@/components/ui/parallax-section"
 import { ContactForm } from "@/components/ContactForm"
+import { ScrollSnapLayout } from "@/components/ScrollSnapLayout"
 import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -29,18 +30,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <IntroAnimation onAnimationComplete={handleAnimationComplete} />
       
-      {/* Test scroll snap container */}
-      <div 
-        className="snap-container relative z-10"
-        style={{ 
-          height: '100vh', 
-          overflowY: 'scroll',
-          scrollSnapType: 'y mandatory',
-          scrollBehavior: 'smooth',
-          scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
-        }}
-      >
+      <ScrollSnapLayout>
         <div className="snap-section" style={{ height: '100vh', scrollSnapAlign: 'start' }}>
           <ParallaxSection speed={0.3} direction="down">
             <Hero />
@@ -85,7 +75,7 @@ const Index = () => {
         <div className="snap-section" style={{ height: '100vh', scrollSnapAlign: 'start' }}>
           <Footer />
         </div>
-      </div>
+      </ScrollSnapLayout>
 
       {/* Single GradientWave for all sections */}
       <GradientWave />

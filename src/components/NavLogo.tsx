@@ -10,7 +10,7 @@ export const NavLogo = () => {
           alt="Zenik AI Logo" 
           className="h-8 sm:h-9 md:h-10" 
         />
-        <span className="text-lg sm:text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600">
+        <span className="text-lg sm:text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-green-400 animate-gradient">
           zenik
         </span>
       </div>

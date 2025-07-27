@@ -4,7 +4,7 @@ export function Footer() {
   const { openForm } = useContactForm();
 
   return (
-    <footer className="min-h-screen flex items-center relative">
+    <footer className="h-screen w-full flex items-center justify-center relative overflow-hidden">
       {/* Top left corner text */}
       <div className="absolute top-8 left-8 z-10 p-4">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient">

@@ -198,7 +198,7 @@ export const IntroAnimation = ({ onAnimationComplete }: { onAnimationComplete?: 
                 animate="visible"
                 onAnimationComplete={handleTextAnimationComplete}
               >
-                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-emerald-600 whitespace-nowrap">
+                <h1 className="text-[32px] md:text-[48px] font-normal tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-green-400 animate-gradient whitespace-nowrap">
                   zenik
                 </h1>
               </motion.div>
