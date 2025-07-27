@@ -19,11 +19,9 @@ const App = () => (
           <Toaster />
           <Sonner />
           <BackgroundPaths />
-          <BrowserRouter>
+          <BrowserRouter basename="/zenik-ai">
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/zenik-ai" element={<Navigate to="/" replace />} />
-              <Route path="/zenik-ai/" element={<Navigate to="/" replace />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
