@@ -28,7 +28,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <IntroAnimation onAnimationComplete={handleAnimationComplete} />
+      <IntroAnimation 
+        onAnimationComplete={handleAnimationComplete}
+      />
       
       <ScrollSnapLayout>
         <div className="snap-section" style={{ height: '100vh', scrollSnapAlign: 'start' }}>

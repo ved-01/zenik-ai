@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { cn } from "@/lib/utils";
 import { useContactForm } from '@/contexts/ContactFormContext';
+import FloatingContactButton from './FloatingContactButton';
 
 
 const animatedWords = ['Education', 'Business', 'Development'];
@@ -94,73 +95,44 @@ export function Hero() {
     const timer = setTimeout(() => {
       setIsVisible(true);
     }, 100);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
     const interval = setInterval(() => {
       setCurrentWordIndex((prev) => (prev + 1) % animatedWords.length);
     }, 3000);
-    return () => clearInterval(interval);
-  }, []);
 
+    return () => {
+      clearTimeout(timer)
+      clearTimeout(interval)
+    };
+  }, []);
+  
   const currentWord = animatedWords[currentWordIndex];
 
   return (
     <>
       {/* Top-right fixed button */}
-      <motion.div 
-        className="fixed top-6 right-6 z-50"
-        variants={heroElementVariants}
-        initial="initial"
-        animate={isVisible ? "animate" : "initial"}
-        transition={{ delay: 0.8 }}
-      >
-        <button 
-          onClick={openForm}
-          className="group relative inline-flex items-center justify-center px-5 py-2.5 text-sm font-medium text-white bg-transparent border-2 border-white/30 rounded-full transition-all duration-300 ease-in-out hover:bg-white hover:text-black hover:border-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3),0_0_40px_rgba(255,255,255,0.2)]"
-        >
-          <span className="relative z-10 flex items-center gap-2">
-            Get In Touch
-            <svg 
-              className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M7 17l9.2-9.2M17 17V7H7"
-              />
-            </svg>
-          </span>
-        </button>
-      </motion.div>
+      <FloatingContactButton />
 
       {/* Hero Section */}
       <div className="relative h-screen overflow-hidden">
-        <motion.div 
+        <motion.div
           className="relative h-full max-w-screen-xl mx-auto px-4 flex items-center justify-center md:px-8"
           variants={fadeMorphVariants}
           initial="initial"
           animate={isVisible ? "animate" : "initial"}
         >
           <div className="space-y-5 max-w-3xl mx-auto text-center">
-            <motion.div 
-              className="flex flex-col items-center"
+            <motion.div
+              className="flex flex-col items-center space-y-4"
               variants={heroElementVariants}
             >
-              <motion.span 
+              <motion.span
                 className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient"
                 variants={heroElementVariants}
               >
                 We are not an AI
               </motion.span>
 
-              <motion.div 
+              <motion.div
                 className="h-20 md:h-24 lg:h-32 flex items-center justify-center my-4 md:my-6"
                 variants={heroElementVariants}
               >
@@ -197,14 +169,14 @@ export function Hero() {
                 </AnimatePresence>
               </motion.div>
 
-              <motion.span 
+              <motion.span
                 className="block text-6xl md:text-7xl lg:text-8xl font-normal tracking-tight leading-tight mb-6 md:mb-8 bg-gradient-to-r from-white to-gray-400 text-transparent bg-clip-text animate-gradient"
                 variants={heroElementVariants}
               >
                 Company
               </motion.span>
-              <motion.span 
-                className="block text-xl md:text-2xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-500 text-transparent bg-clip-text animate-gradient"
+              <motion.span
+                className="block text-xl md:text-2xl font-normal tracking-tight leading-tight bg-gradient-to-r from-white to-gray-500 text-transparent bg-clip-text animate-gradient pt-10"
                 variants={heroElementVariants}
               >
                 We are all of the above.
